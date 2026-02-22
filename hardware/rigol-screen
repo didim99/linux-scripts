@@ -1,0 +1,3 @@
+#! /bin/bash
+DIR=$HOME/tmp
+lxi screenshot -a rigol -p rigol-1000z "$DIR/RIGOL_`date +%Y-%m-%d_%H-%M-%S`.png"

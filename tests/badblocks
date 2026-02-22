@@ -1,0 +1,2 @@
+#! /bin/bash
+badblocks -fswv -b 4096 -t random -t 0x00 -o ~/tmp/$1.map /dev/$1 > ~/tmp/$1.bbl 2>&1

@@ -1,0 +1,7 @@
+#! /bin/bash
+VIDEO=`mwcap-info -v 0:0`
+AUDIO=`mwcap-info --alsa-name-mplayer $VIDEO`
+
+mplayer -lavdopts threads=4 -fs tv:// -tv driver=v4l2:device=$VIDEO:width=1920:height=1080:outfmt=yuy2:alsa:adevice=$AUDIO:amode=2:audiorate=48000:forceaudio:immediatemode=0 &
+sleep 0.5
+mwcap-control --video-output-lowlatency on $VIDEO

@@ -1,0 +1,1 @@
+mwcap-info -i 0:0 | grep -i -e temp -e product
