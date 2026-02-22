@@ -1,0 +1,24 @@
+#! /bin/bash
+
+TARGET_FS=/path/to/target/filesystem/mountpoint
+SRC_DIR=/path/to/your/original/files
+DST_DIR=/path/to/backup/location
+LOG_DIR=/path/to/logs/directory
+
+LOG=$LOG_DIR/src-$(date "+%Y%m%d").log
+gzip $LOG_DIR/src-$(date -d -1day "+%Y%m%d").log
+
+date >> $LOG
+echo "" >> $LOG
+
+mountpoint -q $TARGET_FS
+if [[ $? -ne 0 ]]; then
+    echo "ERROR: $TARGET_FS is not mounted!" >> $LOG
+    exit 1
+fi
+
+rsync --progress --verbose --archive --delete-after \
+    $SRC_DIR/ $DST_DIR >> $LOG
+
+echo "" >> $LOG
+date >> $LOG
