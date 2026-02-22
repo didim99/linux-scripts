@@ -1,0 +1,15 @@
+# IDE systwm files
+/.idea
+/.vs
+
+# Python internal
+/venv
+__pycache__/
+
+# Log and data files
+/log/
+/data/
+*.log
+
+# Local configuration files
+/**/config*/
