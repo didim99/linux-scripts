@@ -1,0 +1,12 @@
+#! /bin/bash
+
+function testdev() {
+  DEV=$1
+  MP=$(findmnt -S ${DEV}1 -o TARGET | tail -n 1)
+  printf "\n### %s (%s) ###\n" "$DEV" "$MP"
+  sudo smartctl -a $DEV
+}
+
+testdev /dev/sda
+testdev /dev/sdb
+testdev /dev/sdc

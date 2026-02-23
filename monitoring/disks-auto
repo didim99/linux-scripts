@@ -1,0 +1,10 @@
+#! /bin/bash
+
+# === Configuration
+
+ROOTDIR=/path/to/directory/with/scripts
+LOGDIR=/path/to/log/dir
+
+# === Script body
+
+$ROOTDIR/disks > $LOGDIR/diskstate-$(date +%Y%m%d)

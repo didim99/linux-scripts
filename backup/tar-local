@@ -6,9 +6,9 @@ TARGET_FS=/path/to/target/filesystem/mountpoint
 SRC_DIR=/path/to/your/original/files
 DST_DIR=/path/to/backup/location
 
-LOG_AGENT=prefix-for-log-file
+LOG_AGENT=prefix-for-log-and-backup-file
 LOG_DIR=/path/to/logs/directory
-INTERVAL=1day
+INTERVAL=1month
 
 # === Script body
 
@@ -24,8 +24,7 @@ if [[ $? -ne 0 ]]; then
     exit 1
 fi
 
-rsync --progress --verbose --archive --delete-after \
-    $SRC_DIR/ $DST_DIR >> $LOG
+tar -vcz -f $DST_DIR/$LOG_AGENT-$(date "+%Y%m%d").tgz $SRC_DIR >> $LOG
 
 echo "" >> $LOG
 date >> $LOG

@@ -1,0 +1,32 @@
+#! /bin/bash
+
+# === Configuration
+
+BUDIR=/path/to/backup/directory
+LOGIN_PATH=sql-bu
+STORE_DAYS=120
+
+# === Script body
+
+function dumpdb() {
+    DBNAME=$1
+    echo "$DBNAME"
+
+    mysqldump \
+        --login-path=$LOGIN_PATH \
+        --host=localhost \
+        --no-tablespaces \
+        --opt \
+        $DBNAME \
+        | gzip > $BUDIR/${DBNAME}_$(date "+%Y-%m-%d").sql.gz
+}
+
+echo ""
+date
+
+dumpdb db1
+dumpdb db2
+
+rm -rf $(find "$BUDIR" -name "*.sql.gz" -mtime +$STORE_DAYS)
+
+date
